@@ -5,6 +5,7 @@ $(document).ready(function(){
 
     $("#add-car").on("click", function () {
         $("#body").load("cars.html");
+        LoadManufacturerNames();
         LoadCars();
     });
 
@@ -88,4 +89,16 @@ $(document).ready(function(){
             });
         });
     };
+
+    function LoadManufacturerNames() {
+        $("#manufacturer-selector").empty();
+
+        $.getJSON("manufacturerNames", function (data) {
+            $.each(data, function (key, value) {
+                $("#manufacturer-selector").append("<option value='" + value + "'>" + value + "</option>");
+            });
+        });
+    };
+
+    
 });
