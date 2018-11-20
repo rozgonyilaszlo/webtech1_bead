@@ -5,10 +5,12 @@ $(document).ready(function(){
 
     $("#add-car").on("click", function () {
         $("#body").load("cars.html");
+        LoadCars();
     });
 
     $("#add-manufacturer").on("click", function () {
         $("#body").load("manufacturers.html");
+        LoadManufacturers();
     });
 
     $(document).on("submit", "#add-new-car", function(event) {
@@ -19,7 +21,11 @@ $(document).ready(function(){
             url: "addCar",
             data: $("#add-new-car form").serialize(),
             success: function(data){
-                alert(data);
+                $("#add-new-car form").trigger("reset");
+                LoadCars();
+            },
+            error: function () {
+                alert("Something went wrong.");
             }
         });
     });
@@ -31,17 +37,55 @@ $(document).ready(function(){
             type: "POST",
             url: "addManufacturers",
             data: $("#add-new-manufacturer form").serialize(),
-            statusCode:{
-                409: function () {
-                    alert("conflict");
-                },
-                200: function () {
-                    alert("sikerült");
-                }
+            success: function(data){
+                $("#add-new-manufacturer form").trigger("reset");
+                LoadManufacturers();
             },
             error: function () {
-                alert("valami más gond");
+                alert("Something went wrong.");
             }
         });
     });
+
+    function LoadCars() {
+        $("#cars").empty();
+
+        $.getJSON("cars", function (data) {
+            $.each(data,  function (key, value) {
+                var row = $("<tr id='"+ key + "'></tr>");
+                var name = $("<td>" + value.name + "</td>");
+                var consumption = $("<td>" + value.consumption + "</td>");
+                var color = $("<td>" + value.color + "</td>");
+                var manufacturer = $("<td>" + value.manufacturer + "</td>");
+                var available = $("<td>" + value.available + "</td>");
+                var year = $("<td>" + value.year + "</td>");
+                var horsepower = $("<td>" + value.horsepower + "</td>");
+                row.append(name);
+                row.append(consumption);
+                row.append(color);
+                row.append(manufacturer);
+                row.append(available);
+                row.append(year);
+                row.append(horsepower);
+                $("#cars").append(row);
+            });
+        });
+    };
+
+    function LoadManufacturers() {
+        $("#manufacturers").empty();
+
+        $.getJSON("manufacturers", function (data) {
+            $.each(data,  function (key, value) {
+               var row = $("<tr id='"+ key + "'></tr>");
+               var name = $("<td>" + value.name + "</td>");
+               var country = $("<td>" + value.country + "</td>");
+               var founded = $("<td>" + value.founded + "</td>");
+               row.append(name);
+               row.append(country);
+               row.append(founded);
+               $("#manufacturers").append(row);
+            });
+        });
+    };
 });

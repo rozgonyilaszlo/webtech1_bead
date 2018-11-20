@@ -1,5 +1,4 @@
 html, body{
-    background-color: #FFF2E8;
     margin:0;
     padding:0;
     height:100%;
@@ -29,7 +28,7 @@ button:hover {
 
 #body {
     padding: 25px;
-    padding-bottom: 25px;
+    padding-bottom: 50px;
 }
 
 #welcome-body {
@@ -62,4 +61,41 @@ form input[type=submit] {
 
 form input[type=submit]:hover {
     background-color: #00af00;
+}
+
+.small {
+    width: 30%;
+}
+
+.medium {
+    width: 50%;
+}
+
+.large {
+    width: 70%;
+}
+
+#add-new-manufacturer, #add-new-car {
+    float: left;
+}
+
+#manufacturers-table, #cars-table {
+    overflow: hidden;
+}
+
+#manufacturers-table table, #cars-table table {
+    border-collapse: collapse;
+}
+
+#manufacturers-table thead, #cars-table thead {
+    background-color: #247BA0;
+    color: white;
+}
+
+#manufacturers-table td, #cars-table td {
+    padding: 5px;
+}
+
+#manufacturers-table tr:nth-child(even), #cars-table tr:nth-child(even){
+    background-color: #f2f2f2
 }
