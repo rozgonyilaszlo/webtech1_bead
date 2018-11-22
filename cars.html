@@ -4,18 +4,18 @@
             <table>
                 <tr>
                     <td>Name:</td>
-                    <td><input type="text" name="name"></td>
+                    <td><input type="text" name="name" required></td>
                 </tr>
 
                 <tr>
                     <td>Consumption:</td>
-                    <td><input type="number" name="consumption"></td>
+                    <td><input type="number" name="consumption" min="0" step="0.01" required></td>
                     <td>l/100km</td>
                 </tr>
 
                 <tr>
                     <td>Color:</td>
-                    <td><input type="text" name="color"></td>
+                    <td><input type="text" name="color" required></td>
                 </tr>
 
                 <tr>
@@ -29,17 +29,17 @@
 
                 <tr>
                     <td>Available:</td>
-                    <td><input type="number" name="available"></td>
+                    <td><input type="number" name="available" min="0" required></td>
                 </tr>
 
                 <tr>
                     <td>Year:</td>
-                    <td><input type="number" name="year"></td>
+                    <td><input type="number" name="year" required></td>
                 </tr>
 
                 <tr>
                     <td>Horsepower:</td>
-                    <td><input type="number" name="horsepower"></td>
+                    <td><input type="number" name="horsepower" min="0" required></td>
                 </tr>
 
                 <tr>

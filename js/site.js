@@ -48,6 +48,20 @@ $(document).ready(function(){
         });
     });
 
+
+    $(document).on("click", "tr .manufacturer-name", function (event) {
+        var manufacturer = $(this).html();
+        document.cookie="name="+manufacturer;
+
+        $.getJSON("manufacturer", function (data) {
+            var carNames = data.map(function(car){
+                return car.name;
+            });
+
+            alert(carNames);
+        });
+    });
+
     function LoadCars() {
         $("#cars").empty();
 
@@ -79,9 +93,10 @@ $(document).ready(function(){
         $.getJSON("manufacturers", function (data) {
             $.each(data,  function (key, value) {
                var row = $("<tr id='"+ key + "'></tr>");
-               var name = $("<td>" + value.name + "</td>");
+               var name = $("<td class='manufacturer-name'>" + value.name + "</td>");
                var country = $("<td>" + value.country + "</td>");
-               var founded = $("<td>" + value.founded + "</td>");
+               //https://flaviocopes.com/javascript-dates/
+               var founded = $("<td>" + new Intl.DateTimeFormat().format(new Date(value.founded)) + "</td>");
                row.append(name);
                row.append(country);
                row.append(founded);
@@ -99,6 +114,4 @@ $(document).ready(function(){
             });
         });
     };
-
-    
 });
